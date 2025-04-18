@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Products
+class TestProducts
 {
     public function __construct(public $id, public $name, public $price) {}
 
@@ -18,14 +18,15 @@ class Products
 
     public static function find($id)
     {
-        $products = Products::all();
+        $products = TestProducts::all();
         $product = $products->firstWhere("id", $id);
         return $product;
     }
 
+     
     public static function findOrFail($id)
     {
-        $product = Products::find($id);
+        $product = TestProducts::find($id);
         if (!$product) {
             abort((404));
         }

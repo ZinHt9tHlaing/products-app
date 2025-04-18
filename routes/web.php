@@ -1,29 +1,18 @@
 <?php
 
+use App\Models\TestProducts;
 use Illuminate\Support\Facades\Route;
-use App\Models\Products;
 
-
-Route::get('/', function () {
-    return view('home', [
-        "title"    => "This is Home page.",
-        "products" => Products::all(),
+Route::get("/", function () {
+    return view("home", [
+        "title" => "Products",
+        "products" => TestProducts::all()
     ]);
 });
 
-Route::get("/about", function () {
-    return view("about", [
-        "name" => "zhh" . fake()->numberBetween(10, 100),
-    ]);
-});
-
-Route::get("/contact", function () {
-    return view("contact-us");
-});
-
-Route::get("/products/{id}", function ($id) {
-    $product = Products::findOrFail($id);
+Route::get(("/products/{id}"), function ($id) {
     return view("product-detail", [
-        "product" => $product
+        "title" => "Product Detail",
+        "product" => TestProducts::findOrFail(($id))
     ]);
 });
